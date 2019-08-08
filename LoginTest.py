@@ -10,40 +10,40 @@ class LoginTest():
     def __init__(self):
         self.driver = webdriver.Firefox(executable_path = '/home/nanda/selenium_tutorial/geckodriver-v0.24.0-linux64/geckodriver')
         self.driver.maximize_window()
-        self.wait = WebDriverWait(self.driver,3)
+        self.wait = WebDriverWait(self.driver,10)
     
     def test_LoginByBtnClick(self):
-        self.driver.get("https://kargo.tech/shipper/welcome/login")
-        self.nameField = self.driver.find_element_by_id("render_phone_number-field")
-        self. passField = self.driver.find_element_by_id("render_textfield")
-        self.button = self.driver.find_element_by_id("button_component-button")
+        self.driver.get("https://shipper-dev.testing.kargo.tech/login")
+        self.nameField = self.driver.find_element_by_id("render_phone_number-field") # Find phone numb field
+        self. passField = self.driver.find_element_by_id("render_textfield") # Find password field
+        self.button = self.driver.find_element_by_id("button_component-button") # Find login button
         self.nameField.send_keys('85710311188')
-        self.passField.send_keys('Tebetbarat04')
+        self.passField.send_keys('Ab1234')
         self.button.click()
         try:
             self.wait.until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR,'.home-page')))
         except TimeoutException:
             print("Invalid ID")
             return
-        self.driver.find_element_by_xpath('/html/body/div/div/div/div[3]/div/div/a[5]').click()
-        self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'/html/body/div/div/div/div[2]/div[1]/div/div/div[2]/span')))
-        self.driver.find_element_by_xpath('/html/body/div/div/div/div[2]/div[1]/div/div/div[5]/div/div[3]/button/span[1]').click()
+        self.driver.find_element_by_xpath('/html/body/div/div/div/div[3]/div/div/a[5]').click() # Find profile button
+        self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="profile_common-disabled_button"]'))) # Find logout button
+        self.driver.find_element_by_xpath('//*[@id="profile_common-disabled_button"]').click() # Click the logout button
         time.sleep(2)
 
     def test_LoginByPressEnter(self):
-        self.driver.get("https://kargo.tech/shipper/welcome/login")
+        self.driver.get("https://shipper-dev.testing.kargo.tech/login")
         self.nameField = self.driver.find_element_by_id("render_phone_number-field")
         self.passField = self.driver.find_element_by_id("render_textfield")
         self.nameField.send_keys('85710311188')
-        self.passField.send_keys('Tebetbarat05', Keys.ENTER)
+        self.passField.send_keys('Ab1234', Keys.ENTER)
         try:
             self.wait.until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR,'.home-page')))
         except TimeoutException:
             print("Invalid ID")
             return
-        self.driver.find_element_by_xpath('/html/body/div/div/div/div[3]/div/div/a[5]').click()
-        self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'/html/body/div/div/div/div[2]/div[1]/div/div/div[2]/span')))
-        self.driver.find_element_by_xpath('/html/body/div/div/div/div[2]/div[1]/div/div/div[5]/div/div[3]/button/span[1]').click()
+        self.driver.find_element_by_xpath('/html/body/div/div/div/div[3]/div/div/a[5]').click() # Find profile button
+        self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="profile_common-disabled_button"]'))) # Find logout button
+        self.driver.find_element_by_xpath('//*[@id="profile_common-disabled_button"]').click() # Click the logout button
         time.sleep(2)
     
 if __name__ == '__main__':
