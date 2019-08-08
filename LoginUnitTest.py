@@ -14,10 +14,10 @@ class LoginUnitTest(unittest.TestCase):
         self.driver = webdriver.Firefox(executable_path = '/home/nanda/selenium_tutorial/geckodriver-v0.24.0-linux64/geckodriver')
         self.driver.maximize_window()
         self.wait = WebDriverWait(self.driver,3)
-        self.driver.get("https://kargo.tech/shipper/welcome/login")
+        self.driver.get("https://shipper-dev.testing.kargo.tech/login")
     
     def test_LoginByBtnClick(self):
-        self.driver.get("https://shipper-dev.testing.kargo.tech/login")
+        #self.driver.get("https://shipper-dev.testing.kargo.tech/login")
         self.nameField = self.driver.find_element_by_id("render_phone_number-field") # Find phone numb field
         self. passField = self.driver.find_element_by_id("render_textfield") # Find password field
         self.button = self.driver.find_element_by_id("button_component-button") # Find login button
@@ -33,7 +33,7 @@ class LoginUnitTest(unittest.TestCase):
         self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="profile_common-disabled_button"]'))) # Find logout button
         self.driver.find_element_by_xpath('//*[@id="profile_common-disabled_button"]').click() # Click the logout button
         time.sleep(2)
-
+    """
     def test_LoginByPressEnter(self):
         self.driver.get("https://shipper-dev.testing.kargo.tech/login")
         self.nameField = self.driver.find_element_by_id("render_phone_number-field")
@@ -49,7 +49,8 @@ class LoginUnitTest(unittest.TestCase):
         self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="profile_common-disabled_button"]'))) # Find logout button
         self.driver.find_element_by_xpath('//*[@id="profile_common-disabled_button"]').click() # Click the logout button
         time.sleep(2)
-
+    """
+    
     def tearDown(self):
         self.driver.quit()
     
